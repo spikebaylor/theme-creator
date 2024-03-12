@@ -1,0 +1,65 @@
+<div class="container">
+
+    <div>
+        <h2 [style.color]="theme.neutralLight">Theme</h2>
+    </div>
+
+    <div class="colors">
+        <app-color-component *ngFor="let color of theme.allColors()" [color]="color"></app-color-component>
+    </div>
+
+    <div class="charts">
+        <div style="width: 400px;">
+            <app-color-chart [colors]="theme.allColors()"
+                             [func]="luminance"
+                             [yMin]="0"
+                             [yMax]="1"
+                             title="Luminance"
+            ></app-color-chart>
+        </div>
+        <div style="width: 400px; ">
+            <app-color-chart [colors]="theme.allColors()"
+                             [func]="chroma"
+                             [yMin]="0"
+                             [yMax]=".5"
+                             title="Chroma"
+            ></app-color-chart>
+        </div>
+        <div style="width: 400px;">
+            <app-color-chart [colors]="theme.allColors()"
+                             [func]="hue"
+                             [yMin]="0"
+                             [yMax]="360"
+                             title="Hue"
+            ></app-color-chart>
+        </div>
+    </div>
+
+    <div class="charts">
+        <div style="width: 400px;">
+            <app-color-chart [colors]="theme.allColors()"
+                             [func]="hslHue"
+                             [yMin]="0"
+                             [yMax]="360"
+                             title="Hue"
+            ></app-color-chart>
+        </div>
+        <div style="width: 400px; ">
+            <app-color-chart [colors]="theme.allColors()"
+                             [func]="hslSaturation"
+                             [yMin]="0"
+                             [yMax]="100"
+                             title="Saturation"
+            ></app-color-chart>
+        </div>
+        <div style="width: 400px;">
+            <app-color-chart [colors]="theme.allColors()"
+                             [func]="hslLightness"
+                             [yMin]="0"
+                             [yMax]="100"
+                             title="Lightness"
+            ></app-color-chart>
+        </div>
+    </div>
+
+</div>

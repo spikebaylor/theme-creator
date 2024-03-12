@@ -1,0 +1,12 @@
+.mainrow {
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+  padding: 16px;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}

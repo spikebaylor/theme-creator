@@ -1,0 +1,19 @@
+<div class="container"  #container>
+    <div class="sliderbox" style="flex-grow: 1">
+        <div class="labelText">{{labelText()}}</div>
+        <div class="colorBox" ></div>
+        <p-slider [(ngModel)]="value" [min]="min()" [max]="max()" [step]="step()"></p-slider>
+    </div>
+    <div class="number-input">
+        <p-inputNumber  [showButtons]="true"
+                        [style.height.px]="32"
+                        [size]="1"
+                        [(ngModel)]="value"
+                        mode="decimal"
+                        [min]="min()"
+                        [max]="max()"
+                        [step]="step()"
+                        [maxFractionDigits]="maxFractionDigits()">
+        </p-inputNumber>
+    </div>
+</div>
