@@ -1,17 +1,6 @@
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  Input,
-  OnChanges,
-  OnInit,
-  signal,
-  SimpleChanges,
-  ViewChild
-} from '@angular/core';
+import {Component, computed, ElementRef, model, viewChild} from '@angular/core';
 import {SliderModule} from "primeng/slider";
 import {Color} from "../../../models/Color";
-import {Range} from "colorjs.io"
 import {FormsModule} from "@angular/forms";
 import {ColorTheory} from "../../../models/ColorTheory";
 import {InputTextModule} from "primeng/inputtext";
@@ -31,53 +20,32 @@ import {ColorSliderComponent} from "./color-slider/color-slider.component";
   templateUrl: './color-picker-panel.component.html',
   styleUrl: './color-picker-panel.component.scss'
 })
-export class ColorPickerPanelComponent implements OnChanges, AfterViewInit {
+export class ColorPickerPanelComponent {
 
-  @Input() color: Color = Color.hexString("blue")
-  @ViewChild("container") container!: ElementRef
+  color = model(Color.hexString("blue"))
 
-  hue: number = this.color.hueLCH()
-  chroma: number = this.color.chromaLCH()
-  luminance: number = this.color.luminanceLCH()
+  container = viewChild<ElementRef>("container")
 
-  hueColorStops = signal<Color[]>([])
-  luminanceColorStops = signal<Color[]>([])
-  chromaColorStops = signal<Color[]>([])
+  luminance= computed(() => this.color().luminanceLCH())
+  chroma= computed(() => this.color().chromaLCH())
+  hue = computed(() => this.color().hueLCH())
 
-  private update() {
-    this.hue = this.color.hueLCH()
-    this.chroma = this.color.chromaLCH()
-    this.luminance = this.color.luminanceLCH()
-
-    this.hueColorStops.set(ColorTheory.LCH.rangeOverHue(this.color));
-    this.chromaColorStops.set(ColorTheory.LCH.rangeOverChroma(this.color));
-    this.luminanceColorStops.set(ColorTheory.LCH.rangeOverLuminance(this.color));
-  }
-
-  onHueChange(event: number) {
-    this.hue = event
-    this.color = this.color.modifyHueLCH(_ => this.hue)
-    this.update()
-  }
+  luminanceColorStops= computed(() => ColorTheory.LCH.rangeOverLuminance(this.color()))
+  chromaColorStops = computed(() => ColorTheory.LCH.rangeOverChroma(this.color()))
+  hueColorStops = computed(() => ColorTheory.LCH.rangeOverHue(this.color()))
 
   onLuminanceChange(event: number) {
-    this.luminance = event
-    this.color = this.color.modifyLuminanceLCH(_ => this.luminance)
-    this.update()
+    this.color.update(c => c.modifyLuminanceLCH(_ => event))
   }
 
   onChromaChange(event: number) {
-    this.chroma = event
-    this.color = this.color.modifyChromaLCH(_ => this.chroma)
-    this.update()
+    this.color.update(c => c.modifyChromaLCH(_ => {
+      return event
+    }))
   }
 
-  ngAfterViewInit(): void {
-    this.update()
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    this.update()
+  onHueChange(event: number) {
+    this.color.update(c =>  c.modifyHueLCH(_ => event))
   }
 
 }

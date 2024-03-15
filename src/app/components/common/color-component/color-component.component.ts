@@ -1,22 +1,46 @@
-import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
+import {Component, computed, EventEmitter, input, Input, model, OnChanges, Output, SimpleChanges} from '@angular/core';
 import {Color} from "../../../models/Color";
+import {ColorTheory} from "../../../models/ColorTheory";
+import _default from "chart.js/dist/plugins/plugin.legend";
+import {ColorPickerDialogComponent} from "../../dialogs/color-picker-dialog/color-picker-dialog.component";
+import {DialogService} from "primeng/dynamicdialog";
 
 @Component({
   selector: 'app-color-component',
   standalone: true,
   imports: [],
   templateUrl: './color-component.component.html',
-  styleUrl: './color-component.component.scss'
+  styleUrl: './color-component.component.scss',
+  providers: [DialogService]
 })
-export class ColorComponent implements OnChanges {
+export class ColorComponent {
 
-  @Input() color: Color = Color.hexString("#000000")
+  color = model.required<Color>()
+  @Output()
+  colorSelected = new EventEmitter<Color>()
+  textShouldBeLight = computed(() => ColorTheory.LCH.textColorShouldBeLight(this.color()))
+  allowColorSelection = input<boolean>(false)
+  title = input<string>('')
+  hex = computed(() => this.color().toHexString())
 
-  ngOnChanges(changes: SimpleChanges): void {
-
+  constructor(private dialogService: DialogService) {
   }
 
+  onPanelClick() {
+    if (this.allowColorSelection()) {
+      ColorPickerDialogComponent.showDialog(this.color(), this.dialogService).onClose.subscribe(c => {
+        if (c) {
+          this.colorSelected.emit(c)
+        }
+      })
+    }
+  }
 
-
-
+  getTitle(): string {
+    if (this.title() == "") {
+      return this.hex();
+    } else {
+      return this.title()
+    }
+  }
 }

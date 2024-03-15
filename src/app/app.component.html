@@ -1,3 +1,13 @@
+<div style="display: flex; flex-direction: row; gap: 32px; padding: 16px;">
+    <p-button (click)="onGenerate()">Generate Theme</p-button>
+    <!--<app-theme-page [theme]="theme()"></app-theme-page>-->
+    <app-color-scheme-page [scheme]="scheme()"></app-color-scheme-page>
+    <div style="display: flex; flex-direction: column; gap: 8px">
+        @for (c of test; track $index) {
+            <app-color-component [color]="c"></app-color-component>
+        }
+    </div>
+</div>
 <!--
 <div class="mainrow" [style.background-color]="nl">
     <div *ngFor="let cc of colorColumns" class="col" >
@@ -41,7 +51,7 @@
     </div>
 </div>-->
 
-<app-color-picker-panel></app-color-picker-panel>
+<!--<app-color-picker-panel></app-color-picker-panel>-->
 
 <!--<app-theme-page [theme]="theme"></app-theme-page>-->
 

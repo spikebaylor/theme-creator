@@ -32,4 +32,11 @@ export class ColorSliderComponent {
     })
   }
 
+  onChange(event: number) {
+    // This is a hack, but for some reason SOMETIMES this becomes a string even though it should not.
+    if (typeof event == "string") {
+      event = Number(event)
+    }
+    this.value.set(event)
+  }
 }

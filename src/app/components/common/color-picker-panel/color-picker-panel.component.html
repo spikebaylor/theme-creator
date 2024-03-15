@@ -1,8 +1,8 @@
 <div class="container" #container>
 
-    <div class="colorbox" [style.background-color]="color"></div>
+    <div class="colorbox" [style.background-color]="color()"></div>
 
-    <app-color-slider [value]="hue"
+    <app-color-slider [value]="hue()"
                       [colorStops]="hueColorStops()"
                       labelText="Hue"
                       [min]="0"
@@ -11,16 +11,16 @@
                       [maxFractionDigits]="2"
                       (valueChange)="onHueChange($event)"></app-color-slider>
 
-    <app-color-slider [value]="chroma"
+    <app-color-slider [value]="chroma()"
                       [colorStops]="chromaColorStops()"
                       labelText="Chroma"
                       [min]="0"
-                      [max]=".5"
-                      [step]=".01"
+                      [max]="0.5"
+                      [step]="0.01"
                       [maxFractionDigits]="3"
                       (valueChange)="onChromaChange($event)"></app-color-slider>
 
-    <app-color-slider [value]="luminance"
+    <app-color-slider [value]="luminance()"
                       [colorStops]="luminanceColorStops()"
                       labelText="Luminance"
                       [min]="0"

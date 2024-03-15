@@ -1,6 +1,11 @@
-<div [style.background-color]="color" class="container">
-    <div>HEX: {{color.toHexString()}}</div>
-    <div>RGB: {{color.toRGBString()}}</div>
-    <div>HSL: {{color.toHSLString()}}</div>
-    <div>LCH: {{color.toLCHString()}}</div>
+<div [style.background-color]="color()" class="container" (click)="onPanelClick()">
+    <div class="labels" [class]="textShouldBeLight() ? 'lightText' : 'darkText'">
+        <div>HEX: {{color().toHexString()}}</div>
+        <div>RGB: {{color().toRGBString()}}</div>
+        <div>HSL: {{color().toHSLString()}}</div>
+        <div>LCH: {{color().toLCHString()}}</div>
+    </div>
+    <div class="name" [class]="textShouldBeLight() ? 'lightText' : 'darkText'">
+        <div>{{getTitle()}}</div>
+    </div>
 </div>

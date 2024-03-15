@@ -1,5 +1,7 @@
 import {Color} from "./Color";
 import ColorJS, {Range} from "colorjs.io/types/index";
+import {Theme} from "./Theme";
+import {ColorScheme} from "./ColorScheme";
 
 export class LCH {
     compliment(root: Color): Color {
@@ -38,6 +40,12 @@ export class LCH {
         return Color.lch(.97, .005, root.hueLCH())
     }
 
+    textColorShouldBeLight(bg: Color): boolean {
+        // this is not the same as LCH Luminance i think
+        const perceivedLuminance = (0.299 * bg.red() + 0.587 * bg.green() + 0.114 * bg.blue());
+        return perceivedLuminance < .5;
+    }
+
     public rangeOverLuminance(color: Color, steps: number = 20): Color[] {
         return this.rangeOverFunc(color, (c, v) => c.modifyLuminanceLCH(_ => v), 1, 0, steps)
     }
@@ -60,11 +68,59 @@ export class LCH {
         }
         return colors;
     }
+
 }
 
 export class ColorTheory {
   static LCH = new LCH()
 
+   static testTonalPalette(color: Color): Color[] {
+        const c500 = color;
+        const l500 = color.lightnessHSL()
+        const colors = []
+        colors.push(c500.modifyLightnessHSL(v => v * 1.84))
+        colors.push(c500.modifyLightnessHSL(v => v * 1.62))
+        colors.push(c500.modifyLightnessHSL(v => v * 1.5))
+        colors.push(c500.modifyLightnessHSL(v => v * 1.35))
+        colors.push(c500.modifyLightnessHSL(v => v * 1.2))
+        colors.push(c500)
+        colors.push(c500.modifyLightnessHSL(v => v * 0.9))
+        colors.push(c500.modifyLightnessHSL(v => v * 0.7))
+        colors.push(c500.modifyLightnessHSL(v => v * 0.5))
+        colors.push(c500.modifyLightnessHSL(v => v * 0.4))
+
+
+        colors.forEach(c => {
+            console.log(c.toHSLString())
+        })
+        return colors;
+    }
+
+    static generateTheme(primary: Color): Theme {
+        return new Theme(
+            primary,
+            ColorTheory.LCH.analogous(primary, 40)[0],
+            ColorTheory.LCH.splitCompliment(primary, 25)[0],
+            ColorTheory.LCH.neutralLight(primary),
+            ColorTheory.LCH.neutralDark(primary),
+            primary.modifyHueLCH(_ => 29.23),
+            primary.modifyHueLCH(_ => 142.50),
+            primary.modifyHueLCH(_ => 109.77)
+        );
+    }
+
+    static generateSceme(primary: Color): ColorScheme {
+        return new ColorScheme(
+            primary,
+            ColorTheory.LCH.analogous(primary, 40)[0],
+            ColorTheory.LCH.splitCompliment(primary, 25)[0],
+            ColorTheory.LCH.neutralLight(primary),
+            ColorTheory.LCH.neutralDark(primary),
+            primary.modifyHueLCH(_ => 29.23),
+            primary.modifyHueLCH(_ => 142.50),
+            primary.modifyHueLCH(_ => 109.77)
+        );
+    }
 }
 
 
