@@ -1,0 +1,28 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  height: 100vh;
+
+  .colors {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    gap: 8px;
+
+    border: 1px solid black;
+    padding: 16px;
+
+  }
+
+  .colorcol {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .hr {
+    height: 2px;
+    background-color: gray;
+  }
+}

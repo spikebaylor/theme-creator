@@ -1,0 +1,14 @@
+<div class="form">
+
+    <app-color-picker-panel [(color)]="color"></app-color-picker-panel>
+
+    <div class="button-bar">
+        <div class="left-side">
+            <p-button (onClick)="reset()" [text]="true" label="Reset" severity="secondary" size="small"></p-button>
+        </div>
+        <div class="right-side">
+            <p-button (onClick)="saveChangesClicked()" label="Save Changes" size="small"></p-button>
+            <p-button (onClick)="cancel()" [outlined]="true" label="Cancel" severity="secondary" size="small"></p-button>
+        </div>
+    </div>
+</div>

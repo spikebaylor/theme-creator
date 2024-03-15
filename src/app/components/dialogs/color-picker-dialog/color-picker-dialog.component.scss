@@ -1,0 +1,23 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  .button-bar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .left-side {
+      display: flex;
+      flex-direction: row;
+      gap: 8px;
+    }
+
+    .right-side {
+      display: flex;
+      flex-direction: row-reverse;
+      gap: 8px;
+    }
+  }
+}
