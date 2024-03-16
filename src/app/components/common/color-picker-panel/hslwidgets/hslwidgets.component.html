@@ -1,0 +1,24 @@
+<div class="container" #container>
+
+    <app-color-slider [value]="hue()"
+                      [colorStops]="hueColorStops()"
+                      labelText="Hue"
+                      [min]="0"
+                      [max]="359"
+                      (valueChange)="onHueChange($event)"></app-color-slider>
+
+    <app-color-slider [value]="saturation()"
+                      [colorStops]="saturationColorStops()"
+                      labelText="Saturation"
+                      [min]="0"
+                      [max]="100"
+                      (valueChange)="onSaturationChange($event)"></app-color-slider>
+
+    <app-color-slider [value]="lightness()"
+                      [colorStops]="lightnessColorStops()"
+                      labelText="Lightness"
+                      [min]="0"
+                      [max]="100"
+                      (valueChange)="onLightnessChange($event)"></app-color-slider>
+
+</div>

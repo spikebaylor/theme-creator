@@ -71,8 +71,34 @@ export class LCH {
 
 }
 
+export class HSL {
+    public rangeOverLightness(color: Color, steps: number = 20): Color[] {
+        return this.rangeOverFunc(color, (c, v) => c.modifyLightnessHSL(_ => v), 100, 0, steps)
+    }
+
+    public rangeOverHue(color: Color, steps: number = 20): Color[] {
+        return this.rangeOverFunc(color, (c, v) => c.modifyHueHSL(_ => v), 360, 0, steps)
+    }
+
+    public rangeOverSaturation(color: Color, steps: number = 20): Color[] {
+        return this.rangeOverFunc(color, (c, v) => c.modifySaturationHSL(_ => v), 100, 0, steps)
+    }
+
+    private rangeOverFunc(color: Color, func: (c: Color, v: number) => Color, max: number , min: number = 0, steps: number = 20): Color[]  {
+        const stepSize = (max - min) / steps
+        const colors = []
+        for (let i = 0; i < steps; i++) {
+            const value = i * stepSize
+            const c = func(color, value)
+            colors.push(c)
+        }
+        return colors;
+    }
+}
+
 export class ColorTheory {
   static LCH = new LCH()
+  static HSL = new HSL()
 
    static testTonalPalette(color: Color): Color[] {
         const c500 = color;

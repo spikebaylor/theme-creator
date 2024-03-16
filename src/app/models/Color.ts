@@ -84,6 +84,14 @@ export class Color {
         return this.modifyHSL((h,s,l) => [h, s, block(l)])
     }
 
+    public modifySaturationHSL(block: (v: number) => number): Color {
+        return this.modifyHSL((h,s,l) => [h, block(s), l])
+    }
+
+    public modifyHueHSL(block: (v: number) => number): Color {
+        return this.modifyHSL((h,s,l) => [block(h), s, l])
+    }
+
     public modifyHueLCH(block: (h: number) => number): Color {
         return this.modifyLCH((l,c,h) => [l, c, block(h) % 360])
     }
