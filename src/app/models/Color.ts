@@ -4,13 +4,15 @@ export class Color {
     private color: ColorJS
     private lchColor: ColorJS | undefined
     private rgbColor: ColorJS | undefined
+    private rgbColorInGamut: ColorJS | undefined
     private hslColor: ColorJS | undefined
+    private hslColorInGamut: ColorJS | undefined
 
     public static lch(luminance: number, chroma: number, hue: number): Color {
         return new Color(new ColorJS("oklch", [luminance, chroma as number, hue]))
     }
 
-    public static hexString(color: string): Color {
+    public static fromString(color: string): Color {
         return new Color(new ColorJS(color))
     }
 
@@ -26,16 +28,16 @@ export class Color {
         this.color = color
     }
 
-    public red(): number {
-        return this.rgb().r;
+    public red(forceGamut: boolean = false): number {
+        return this.rgb(forceGamut).r;
     }
 
-    public green(): number {
-        return this.rgb().g
+    public green(forceGamut: boolean = false): number {
+        return this.rgb(forceGamut).g
     }
 
-    public blue(): number {
-        return this.rgb().b;
+    public blue(forceGamut: boolean = false): number {
+        return this.rgb(forceGamut).b;
     }
 
     public hueLCH(): number {
@@ -50,16 +52,16 @@ export class Color {
         return this.lch().c;
     }
 
-    public hueHSL(): number {
-        return this.hsl().h
+    public hueHSL(forceGamut: boolean = false): number {
+        return this.hsl(forceGamut).h
     }
 
-    public saturationHSL(): number {
-        return this.hsl().s
+    public saturationHSL(forceGamut: boolean = false): number {
+        return this.hsl(forceGamut).s
     }
 
-    public lightnessHSL(): number {
-        return this.hsl().l
+    public lightnessHSL(forceGamut: boolean = false): number {
+        return this.hsl(forceGamut).l
     }
 
     public modifyLCH(block: (l: number, c: number, h:number) => number[]): Color {
@@ -111,20 +113,48 @@ export class Color {
         return this.lchColor;
     }
 
-    private rgb(): ColorJS {
-        if (!this.rgbColor) {
-            // TODO just mapping to srgb will give coordinates that are out of bands. which may be ok
-            // TODO calling toGamut() maps it to the closest value within bound
-            this.rgbColor = this.color.to("srgb").toGamut()
+    private rgb(forceGamut: boolean = false): ColorJS {
+        if (!forceGamut) {
+            if (!this.rgbColor) {
+                this.rgbColor = this.color.to("srgb")
+            }
+            return this.rgbColor;
+        } else {
+            if (!this.rgbColorInGamut) {
+                this.rgbColorInGamut = this.color.to("srgb").toGamut()
+            }
+            return this.rgbColorInGamut
         }
-        return this.rgbColor;
     }
 
-    private hsl(): ColorJS {
-        if (!this.hslColor) {
-            this.hslColor = this.color.to("hsl")
+    public forceRGBGamut(): Color {
+        return new Color(this.rgb(true));
+    }
+
+    public inRGBGamut(): boolean {
+        return this.rgb().inGamut();
+    }
+
+    private hsl(forceGamut: boolean = false): ColorJS {
+        if (!forceGamut) {
+            if (!this.hslColor) {
+                this.hslColor = this.color.to("hsl")
+            }
+            return this.hslColor;
+        } else {
+            if (!this.hslColorInGamut) {
+                this.hslColorInGamut = this.color.to("hsl").toGamut()
+            }
+            return this.hslColorInGamut;
         }
-        return this.hslColor;
+    }
+
+    public forceHSLGamut(): Color {
+        return new Color(this.hsl(true));
+    }
+
+    public inHSLGamut(): boolean {
+        return this.hsl().inGamut();
     }
 
     public toString() {
@@ -146,13 +176,10 @@ export class Color {
     private rgbString: string | undefined
     public toRGBString(): string {
         if (!this.rgbString) {
-            const red = (((this.red() * 255) + 255) % 255).toFixed(0)
-            const green = (((this.green() * 255) + 255) % 255).toFixed(0)
-            const blue = (((this.blue() * 255) + 255) % 255).toFixed(0)
-/*            const red = this.red()
-            const green = this.green()
-            const blue = this.blue()*/
-            this.rgbString = `(${red}, ${green}, ${blue})`
+            const red = (this.red() * 255).toFixed(0)
+            const green = (this.green() * 255).toFixed(0)
+            const blue = (this.blue() * 255).toFixed(0)
+            this.rgbString = `rgb(${red}, ${green}, ${blue})`
         }
         return this.rgbString
     }
@@ -171,7 +198,7 @@ export class Color {
             const h = this.hueHSL().toFixed(2)
             const s = this.saturationHSL().toFixed(2)
             const l = this.lightnessHSL().toFixed(2)
-            this.hslString = `(${h}, ${s}%, ${l}%)`
+            this.hslString = `hsl(${h}, ${s}%, ${l}%)`
         }
         return this.hslString;
     }

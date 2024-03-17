@@ -1,0 +1,25 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  .gamut-block {
+
+    .label {
+      font-size: 9pt;
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%
+    }
+
+    .warning {
+      color: #b00;
+      font-weight: bold;
+      font-size: 8pt;
+    }
+
+  }
+
+}

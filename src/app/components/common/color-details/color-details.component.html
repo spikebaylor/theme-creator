@@ -1,0 +1,30 @@
+<div class="container">
+    <div class="gamut-block">
+        <div class="label">HEX</div>
+        <input pInputText [value]="hexString()" readonly>
+        @if (!inRGBGamut()) {
+            <div class="warning">Not in sRGB Gamut</div>
+        }
+    </div>
+
+    <div class="gamut-block">
+        <div class="label">sRGB</div>
+        <input pInputText [value]="rgbString()" readonly>
+        @if (!inRGBGamut()) {
+            <div class="warning">Color is actually {{actualRGB()}}</div>
+        }
+    </div>
+
+    <div class="gamut-block">
+        <div class="label">HSL</div>
+        <input pInputText [value]="hslString()" readonly>
+        @if (!inRGBGamut()) {
+            <div class="warning">Color is actually {{actualHSL()}}</div>
+        }
+    </div>
+
+    <div class="gamut-block">
+        <div class="label">okLCH</div>
+        <input pInputText [value]="lchString()" readonly>
+    </div>
+</div>

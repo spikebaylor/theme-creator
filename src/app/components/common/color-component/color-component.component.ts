@@ -18,7 +18,7 @@ export class ColorComponent {
   color = model.required<Color>()
   @Output()
   colorSelected = new EventEmitter<Color>()
-  textShouldBeLight = computed(() => ColorTheory.LCH.textColorShouldBeLight(this.color()))
+  textShouldBeLight = computed(() => ColorTheory.textColorShouldBeLight(this.color()))
   allowColorSelection = input<boolean>(false)
   title = input<string>('')
   hex = computed(() => this.color().toHexString())

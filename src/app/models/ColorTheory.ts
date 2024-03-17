@@ -40,12 +40,6 @@ export class LCH {
         return Color.lch(.97, .005, root.hueLCH())
     }
 
-    textColorShouldBeLight(bg: Color): boolean {
-        // this is not the same as LCH Luminance i think
-        const perceivedLuminance = (0.299 * bg.red() + 0.587 * bg.green() + 0.114 * bg.blue());
-        return perceivedLuminance < .5;
-    }
-
     public rangeOverLuminance(color: Color, steps: number = 20): Color[] {
         return this.rangeOverFunc(color, (c, v) => c.modifyLuminanceLCH(_ => v), 1, 0, steps)
     }
@@ -101,9 +95,10 @@ export class ColorTheory {
   static HSL = new HSL()
 
    static testTonalPalette(color: Color): Color[] {
-        const c500 = color;
+        const c500 = color.forceHSLGamut()
         const l500 = color.lightnessHSL()
         const colors = []
+
         colors.push(c500.modifyLightnessHSL(v => v * 1.84))
         colors.push(c500.modifyLightnessHSL(v => v * 1.62))
         colors.push(c500.modifyLightnessHSL(v => v * 1.5))
@@ -115,10 +110,6 @@ export class ColorTheory {
         colors.push(c500.modifyLightnessHSL(v => v * 0.5))
         colors.push(c500.modifyLightnessHSL(v => v * 0.4))
 
-
-        colors.forEach(c => {
-            console.log(c.toHSLString())
-        })
         return colors;
     }
 
@@ -146,6 +137,16 @@ export class ColorTheory {
             primary.modifyHueLCH(_ => 142.50),
             primary.modifyHueLCH(_ => 109.77)
         );
+    }
+
+    static textColorShouldBeLight(bg: Color): boolean {
+        // this is not the same as LCH Luminance i think
+        const perceivedLuminance = (0.299 * bg.red(true) + 0.587 * bg.green(true) + 0.114 * bg.blue(true));
+        return perceivedLuminance < .5;
+    }
+
+    static textColor(bg: Color, light: Color = Color.fromString("white"), dark: Color = Color.fromString("black")): Color {
+        return this.textColorShouldBeLight(bg) ? light : dark;
     }
 }
 

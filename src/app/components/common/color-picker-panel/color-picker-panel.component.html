@@ -1,17 +1,40 @@
-<div class="container" #container>
+<div class="wrapper">
 
-    <div class="colorbox" [style.background-color]="color()"></div>
+    <div class="container" #container>
 
-    <p-dropdown [options]="colorSpaceOptions" [(ngModel)]="colorSpace"></p-dropdown>
+        <div class="colorbox-container">
 
-    @switch (colorSpace) {
-        @case ("okLCH") {
-            <app-lchwidgets [color]="color()" (colorChange)="color.set($event)"></app-lchwidgets>
+            <div class="colorbox-header">
+                <div class="header">RGB</div>
+                <div class="header">{{colorSpace}}</div>
+            </div>
+
+            <div class="colorbox">
+                <div class="color" [style.background-color]="rgbColor()">
+                    @if(!inRGBGamut()) {
+                        <div [style.color]="ColorTheory.textColor(color())">RGB Fallback</div>
+                    }
+                </div>
+                <div class="color" [style.background-color]="color()"></div>
+            </div>
+        </div>
+
+        <p-dropdown [options]="colorSpaceOptions" [(ngModel)]="colorSpace"></p-dropdown>
+
+        @switch (colorSpace) {
+            @case ("okLCH") {
+                <app-lchwidgets [color]="color()" (colorChange)="color.set($event)"></app-lchwidgets>
+            }
+            @case ("HSL") {
+               <app-hslwidgets [color]="color()" (colorChange)="color.set($event)"></app-hslwidgets>
+            }
         }
-        @case ("HSL") {
-           <app-hslwidgets [color]="color()" (colorChange)="color.set($event)"></app-hslwidgets>
-        }
-    }
+
+    </div>
+
+    <p-panel header="Details" [toggleable]="true" [collapsed]="true">
+        <app-color-details [color]="color()"></app-color-details>
+    </p-panel>
 
 
 </div>

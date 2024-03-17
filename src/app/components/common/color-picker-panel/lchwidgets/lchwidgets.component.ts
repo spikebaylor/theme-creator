@@ -14,7 +14,7 @@ import {ColorTheory} from "../../../../models/ColorTheory";
 })
 export class LCHWidgetsComponent {
 
-  color = model(Color.hexString("blue"))
+  color = model(Color.fromString("blue"))
 
   container = viewChild<ElementRef>("container")
 

@@ -18,10 +18,10 @@ export class ColorPickerDialogComponent {
 
   color: Color;
 
-  public static showDialog(color: Color = Color.hexString("red"), dialogService: DialogService): DynamicDialogRef {
+  public static showDialog(color: Color = Color.fromString("red"), dialogService: DialogService): DynamicDialogRef {
     return dialogService.open(ColorPickerDialogComponent, {
       header: 'Choose Color',
-      width: '400px',
+      width: '700px',
       data: {inputColor: color}
     })
   }
