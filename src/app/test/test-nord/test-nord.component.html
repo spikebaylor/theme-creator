@@ -1,0 +1,61 @@
+<div style="display: flex; flex-direction: row">
+
+<div style="display: flex; flex-direction: column; gap: 8px">
+    @for (c of chartColors; track $index) {
+        <app-color-component [color]="c"></app-color-component>
+    }
+</div>
+
+
+<div style="display: flex; flex-direction: column; gap: 8px">
+    <div style="width: 400px; height: 200px">
+        <app-color-chart [colors]="chartColors"
+                         [func]="luminance"
+                         [yMin]="0"
+                         [yMax]="1"
+                         title="Luminance LCH"
+        ></app-color-chart>
+    </div>
+    <div style="width: 400px; height: 200px">
+        <app-color-chart [colors]="chartColors"
+                         [func]="chroma"
+                         [yMin]="0"
+                         [yMax]=".5"
+                         title="Chroma LCH"
+        ></app-color-chart>
+    </div>
+    <div style="width: 400px; height: 200px">
+        <app-color-chart [colors]="chartColors"
+                         [func]="hueLCH"
+                         [yMin]="0"
+                         [yMax]="360"
+                         title="Hue LCH"
+        ></app-color-chart>
+    </div>
+
+    <div style="width: 400px; height: 200px">
+        <app-color-chart [colors]="chartColors"
+                         [func]="hueHSL"
+                         [yMin]="0"
+                         [yMax]="359"
+                         title="Hue HSL"
+        ></app-color-chart>
+    </div>
+    <div style="width: 400px; height: 200px">
+        <app-color-chart [colors]="chartColors"
+                         [func]="saturation"
+                         [yMin]="0"
+                         [yMax]="100"
+                         title="Saturation HSL"
+        ></app-color-chart>
+    </div>
+    <div style="width: 400px; height: 200px">
+        <app-color-chart [colors]="chartColors"
+                         [func]="lightness"
+                         [yMin]="0"
+                         [yMax]="100"
+                         title="Lightness HSL"
+        ></app-color-chart>
+    </div>
+</div>
+</div>

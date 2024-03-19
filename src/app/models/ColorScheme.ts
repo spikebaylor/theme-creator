@@ -50,7 +50,7 @@ export class ColorScheme {
     }
 
     private makeTonalPalette(root: Color): Map<number, Color> {
-        const colors = ColorTheory.testTonalPalette(root);
+        const colors = ColorTheory.generateTones(root);
         const map: Map<number, Color> = new Map()
         ColorScheme.numbers.forEach((value, index) => {
             const c = colors[index]

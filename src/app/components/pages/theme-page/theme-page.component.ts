@@ -21,7 +21,7 @@ export class ThemePageComponent {
 
   theme = input.required<Theme>()
 
-  ptones = computed(() => ColorTheory.testTonalPalette(this.theme().primary))
-  stones = computed(() => ColorTheory.testTonalPalette(this.theme().secondary))
+  ptones = computed(() => ColorTheory.generateTones(this.theme().primary))
+  stones = computed(() => ColorTheory.generateTones(this.theme().secondary))
 
 }

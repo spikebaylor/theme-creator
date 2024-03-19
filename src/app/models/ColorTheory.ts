@@ -37,7 +37,9 @@ export class LCH {
     }
 
     neutralLight(root: Color): Color {
-        return Color.lch(.97, .005, root.hueLCH())
+        //return Color.lch(.97, .005, root.hueLCH())
+        return root.modifyLCH((_,c,h) => [.92,.01,h])
+        //return Color.lch(.97, .005, root.hueLCH())
     }
 
     public rangeOverLuminance(color: Color, steps: number = 20): Color[] {
@@ -94,6 +96,26 @@ export class ColorTheory {
   static LCH = new LCH()
   static HSL = new HSL()
 
+    static generateTones(color: Color): Color[] {
+        const lightness =
+
+        const tints = Color.fromString("white").steps(color, 7)
+        const shades = color.steps(Color.fromString("black"), 6)
+        const colors: Color[] = [
+            tints[1], //50
+            tints[2], //100
+            tints[3], //200
+            tints[4], //300
+            tints[5], //400
+            color,
+            shades[1], //600
+            shades[2], //700
+            shades[3], //800
+            shades[4], //900
+        ]
+        return colors;
+
+    }
    static testTonalPalette(color: Color): Color[] {
         const c500 = color.forceHSLGamut()
         const l500 = color.lightnessHSL()

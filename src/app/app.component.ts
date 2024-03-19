@@ -11,11 +11,12 @@ import {ColorPickerPanelComponent} from "./components/common/color-picker-panel/
 import {DialogService} from "primeng/dynamicdialog";
 import {ButtonModule} from "primeng/button";
 import {ColorSchemePageComponent} from "./components/pages/color-scheme-page/color-scheme-page.component";
+import {TestNordComponent} from "./test/test-nord/test-nord.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-    imports: [RouterOutlet, ColorSwatchComponent, NgForOf, ColorComponent, ColorChartComponent, ThemePageComponent, ColorPickerPanelComponent, ButtonModule, ColorSchemePageComponent],
+    imports: [RouterOutlet, ColorSwatchComponent, NgForOf, ColorComponent, ColorChartComponent, ThemePageComponent, ColorPickerPanelComponent, ButtonModule, ColorSchemePageComponent, TestNordComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   providers: [DialogService]
@@ -23,27 +24,11 @@ import {ColorSchemePageComponent} from "./components/pages/color-scheme-page/col
 export class AppComponent {
   title = 'theme-creator';
 
-  theme = signal(ColorTheory.generateTheme(Color.fromString("#5e81ac")))
-  scheme = signal(ColorTheory.generateSceme(Color.fromString("#5e81ac")))
-  tones = computed(() => ColorTheory.testTonalPalette(this.theme().primary))
-  test = [
-      Color.fromString("#eff2f7"),
-      Color.fromString("#cdd8e5"),
-      Color.fromString("#b5c5d9"),
-      Color.fromString("#93abc7"),
-      Color.fromString("#7e9abd"),
-      Color.fromString("#5e81ac"),
-      Color.fromString("#56759d"),
-      Color.fromString("#435c7a"),
-      Color.fromString("#34475f"),
-      Color.fromString("#273648"),
+  //theme = signal(ColorTheory.generateTheme(Color.fromString("#5e81ac")))
 
-  ]
-
+  scheme = signal(ColorTheory.generateSceme(Color.fromString("#0b86a8")))
 
   onGenerate() {
-/*    const t = ColorTheory.generateTheme(this.theme().primary)
-    this.theme.set(t)*/
       const t = ColorTheory.generateSceme(this.scheme().getColor("primary", 500));
       this.scheme.set(t)
   }

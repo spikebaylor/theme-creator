@@ -203,8 +203,11 @@ export class Color {
         return this.hslString;
     }
 
-/*    public rangeLCH(color: Color, type: "longer" | "shorter" | "increasing" | "decreasing" | "raw" = "raw"): Range  {
+    public rangeLCH(color: Color, type: "longer" | "shorter" | "increasing" | "decreasing" | "raw" = "raw"): Range  {
         return this.lch().range(color.lch(), {space: "lch", hue: type})
-    }*/
+    }
 
+    public steps(color: Color, steps: number): Color[]  {
+        return this.lch().steps(color.lch(), {space: "lch", steps: steps}).map(cjs => new Color(cjs))
+    }
 }
