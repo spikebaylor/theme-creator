@@ -77,6 +77,18 @@ export class Color {
     return Color.rgb(res[0], res[1], res[2])
   }
 
+  public modifyRed(block: (v: number) => number): Color {
+    return this.modifyRGB((r,g,b) => [block(r), g, b])
+  }
+
+  public modifyGreen(block: (v: number) => number): Color {
+    return this.modifyRGB((r,g,b) => [r, block(g), b])
+  }
+
+  public modifyBlue(block: (v: number) => number): Color {
+    return this.modifyRGB((r,g,b) => [r, g, block(b)])
+  }
+
   public modifyHSL(block: (h: number, s: number, l: number) => number[]): Color {
     const hsl = this.hsl()
     const res = block(hsl.h, hsl.s, hsl.l)

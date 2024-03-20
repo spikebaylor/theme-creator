@@ -27,17 +27,20 @@
       </div>
 
         @switch (colorSpace) {
+            @case ("HSL") {
+                <app-hslwidgets [color]="color()" (colorChange)="color.set($event)"></app-hslwidgets>
+            }
+            @case ("RGB") {
+                <app-rgbwidgets [color]="color()" (colorChange)="color.set($event)"></app-rgbwidgets>
+            }
             @case ("okLCH") {
                 <app-lchwidgets [color]="color()" (colorChange)="color.set($event)"></app-lchwidgets>
-            }
-            @case ("HSL") {
-               <app-hslwidgets [color]="color()" (colorChange)="color.set($event)"></app-hslwidgets>
             }
         }
 
     </div>
 
-    <p-panel header="Details" [toggleable]="true" [collapsed]="true">
+    <p-panel header="Details" [toggleable]="true" [collapsed]="false">
         <app-color-details [color]="color()"></app-color-details>
     </p-panel>
 

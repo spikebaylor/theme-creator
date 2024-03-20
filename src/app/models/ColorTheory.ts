@@ -92,9 +92,35 @@ export class HSL {
     }
 }
 
+export class RGB {
+    public rangeOverRed(color: Color, steps: number = 20): Color[] {
+        return this.rangeOverFunc(color, (c, v) => c.modifyRed(_ => v), 1, 0, steps)
+    }
+
+    public rangeOverGreen(color: Color, steps: number = 20): Color[] {
+        return this.rangeOverFunc(color, (c, v) => c.modifyGreen(_ => v), 1, 0, steps)
+    }
+
+    public rangeOverBlue(color: Color, steps: number = 20): Color[] {
+        return this.rangeOverFunc(color, (c, v) => c.modifyBlue(_ => v), 1, 0, steps)
+    }
+
+    private rangeOverFunc(color: Color, func: (c: Color, v: number) => Color, max: number , min: number = 0, steps: number = 20): Color[]  {
+        const stepSize = (max - min) / steps
+        const colors = []
+        for (let i = 0; i < steps; i++) {
+            const value = i * stepSize
+            const c = func(color, value)
+            colors.push(c)
+        }
+        return colors;
+    }
+}
+
 export class ColorTheory {
   static LCH = new LCH()
   static HSL = new HSL()
+    static RGB = new RGB()
 
     static generateTones(color: Color): Color[] {
         const tints = Color.fromString("white").steps(color, 7)

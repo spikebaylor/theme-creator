@@ -1,0 +1,30 @@
+<div class="container" #container>
+
+    <app-color-slider [value]="red()"
+                      [colorStops]="redColorStops()"
+                      labelText="Red"
+                      [min]="0"
+                      [max]="1"
+                      [step]=".01"
+                      [maxFractionDigits]="2"
+                      (valueChange)="onRedChange($event)"></app-color-slider>
+
+    <app-color-slider [value]=green()
+                      [colorStops]="greenColorStops()"
+                      labelText="Green"
+                      [min]="0"
+                      [max]="1"
+                      [step]=".01"
+                      [maxFractionDigits]="2"
+                      (valueChange)="onGreenChange($event)"></app-color-slider>
+
+    <app-color-slider [value]="blue()"
+                      [colorStops]="blueColorStops()"
+                      labelText="Blue"
+                      [min]="0"
+                      [max]="1"
+                      [step]=".01"
+                      [maxFractionDigits]="2"
+                      (valueChange)="onBlueChange($event)"></app-color-slider>
+
+</div>

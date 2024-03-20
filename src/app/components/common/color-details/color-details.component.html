@@ -1,7 +1,7 @@
 <div class="container">
     <div class="gamut-block">
         <div class="label">HEX</div>
-        <input pInputText [value]="hexString()" readonly>
+        <input pInputText [value]="hexString()" readonly (click)="copy(hexString())">
         @if (!inRGBGamut()) {
             <div class="warning">Not in sRGB Gamut</div>
         }
@@ -9,7 +9,7 @@
 
     <div class="gamut-block">
         <div class="label">sRGB</div>
-        <input pInputText [value]="rgbString()" readonly>
+        <input pInputText [value]="rgbString()" readonly (click)="copy(rgbString())">
         @if (!inRGBGamut()) {
             <div class="warning">Color is actually {{actualRGB()}}</div>
         }
@@ -17,7 +17,7 @@
 
     <div class="gamut-block">
         <div class="label">HSL</div>
-        <input pInputText [value]="hslString()" readonly>
+        <input pInputText [value]="hslString()" readonly (click)="copy(hslString())">
         @if (!inRGBGamut()) {
             <div class="warning">Color is actually {{actualHSL()}}</div>
         }
@@ -25,6 +25,6 @@
 
     <div class="gamut-block">
         <div class="label">okLCH</div>
-        <input pInputText [value]="lchString()" readonly>
+        <input pInputText [value]="lchString()" readonly (click)="copy(lchString())">
     </div>
 </div>

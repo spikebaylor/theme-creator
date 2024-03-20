@@ -13,6 +13,7 @@ import {ColorDetailsComponent} from "../color-details/color-details.component";
 import {AccordionModule} from "primeng/accordion";
 import {PanelModule} from "primeng/panel";
 import {ButtonModule} from "primeng/button";
+import {RGBWidgetsComponent} from "./rgbwidgets/rgbwidgets.component";
 
 @Component({
   selector: 'app-color-picker-panel',
@@ -29,7 +30,8 @@ import {ButtonModule} from "primeng/button";
     ColorDetailsComponent,
     AccordionModule,
     PanelModule,
-    ButtonModule
+    ButtonModule,
+    RGBWidgetsComponent
   ],
   templateUrl: './color-picker-panel.component.html',
   styleUrl: './color-picker-panel.component.scss'
@@ -40,8 +42,8 @@ export class ColorPickerPanelComponent {
   rgbColor = computed(() => this.color().forceRGBGamut())
   inRGBGamut = computed(() => this.color().inRGBGamut())
 
-  colorSpaceOptions = ["okLCH", "HSL"]
-  colorSpace = "okLCH"
+  colorSpaceOptions = ["HSL", "RGB", "okLCH" ]
+  colorSpace = "HSL"
 
   protected readonly ColorTheory = ColorTheory;
   textInput: string = '';
