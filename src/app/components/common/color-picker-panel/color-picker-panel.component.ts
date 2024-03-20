@@ -12,6 +12,7 @@ import {HSLWidgetsComponent} from "./hslwidgets/hslwidgets.component";
 import {ColorDetailsComponent} from "../color-details/color-details.component";
 import {AccordionModule} from "primeng/accordion";
 import {PanelModule} from "primeng/panel";
+import {ButtonModule} from "primeng/button";
 
 @Component({
   selector: 'app-color-picker-panel',
@@ -27,7 +28,8 @@ import {PanelModule} from "primeng/panel";
     HSLWidgetsComponent,
     ColorDetailsComponent,
     AccordionModule,
-    PanelModule
+    PanelModule,
+    ButtonModule
   ],
   templateUrl: './color-picker-panel.component.html',
   styleUrl: './color-picker-panel.component.scss'
@@ -42,5 +44,20 @@ export class ColorPickerPanelComponent {
   colorSpace = "okLCH"
 
   protected readonly ColorTheory = ColorTheory;
+  textInput: string = '';
+
+  onSetColorClicked() {
+    console.log(`onSetColorClicked`)
+    if (this.textInput.trim() != '') {
+      try {
+        const newColor = Color.fromString(this.textInput)
+        console.log(`newColor: ${newColor}`)
+        this.color.set(newColor)
+        this.textInput = ''
+      } catch (error) {
+        console.error("Could not parse text as color, need to add an error msg somewhere.")
+      }
+    }
+  }
 
 }

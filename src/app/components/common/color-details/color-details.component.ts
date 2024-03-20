@@ -18,13 +18,13 @@ export class ColorDetailsComponent {
   color = input.required<Color>()
   inRGBGamut = computed(() => this.color().inRGBGamut())
 
-  hexString = computed(() => this.color().forceRGBGamut().toHexString())
+  hexString = computed(() => this.color().toHexString(true))
 
   actualRGB = computed(() => this.color().toRGBString())
-  rgbString = computed(() => this.color().forceRGBGamut().toRGBString())
+  rgbString = computed(() => this.color().toRGBString(true))
 
   actualHSL = computed(() => this.color().toHSLString())
-  hslString = computed(() => this.color().forceHSLGamut().toHSLString())
+  hslString = computed(() => this.color().toHSLString(true))
 
   lchString = computed(() => this.color().toLCHString())
 

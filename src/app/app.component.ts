@@ -1,7 +1,5 @@
-import {Component, computed, signal} from '@angular/core';
+import {Component, signal} from '@angular/core';
 import {RouterOutlet} from '@angular/router';
-import {ColorSwatchComponent} from "./common/color-swatch/color-swatch.component";
-import {NgForOf} from "@angular/common";
 import {ColorComponent} from "./components/common/color-component/color-component.component";
 import {Color} from "./models/Color";
 import {ColorTheory} from "./models/ColorTheory";
@@ -16,7 +14,7 @@ import {TestNordComponent} from "./test/test-nord/test-nord.component";
 @Component({
   selector: 'app-root',
   standalone: true,
-    imports: [RouterOutlet, ColorSwatchComponent, NgForOf, ColorComponent, ColorChartComponent, ThemePageComponent, ColorPickerPanelComponent, ButtonModule, ColorSchemePageComponent, TestNordComponent],
+    imports: [RouterOutlet, ColorComponent, ColorChartComponent, ThemePageComponent, ColorPickerPanelComponent, ButtonModule, ColorSchemePageComponent, TestNordComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   providers: [DialogService]
@@ -26,7 +24,7 @@ export class AppComponent {
 
   //theme = signal(ColorTheory.generateTheme(Color.fromString("#5e81ac")))
 
-  scheme = signal(ColorTheory.generateSceme(Color.fromString("#0b86a8")))
+  scheme = signal(ColorTheory.generateSceme(Color.fromString("rgb(119, 22, 153)")))
 
   onGenerate() {
       const t = ColorTheory.generateSceme(this.scheme().getColor("primary", 500));

@@ -19,7 +19,12 @@
             </div>
         </div>
 
+      <div style="display: flex; flex-direction: row; gap: 8px; align-items: center">
         <p-dropdown [options]="colorSpaceOptions" [(ngModel)]="colorSpace"></p-dropdown>
+
+        <input pInputText [(ngModel)]="textInput" style="height: 32px; flex-grow: 1">
+        <p-button (click)="onSetColorClicked()" [outlined]="true" size="small">Set Color</p-button>
+      </div>
 
         @switch (colorSpace) {
             @case ("okLCH") {

@@ -97,8 +97,6 @@ export class ColorTheory {
   static HSL = new HSL()
 
     static generateTones(color: Color): Color[] {
-        const lightness =
-
         const tints = Color.fromString("white").steps(color, 7)
         const shades = color.steps(Color.fromString("black"), 6)
         const colors: Color[] = [

@@ -33,19 +33,19 @@
   }
 
   &:hover {
-    .labels {
+/*    .labels {
       transition: visibility 500ms;
       display: flex;
       visibility: visible;
-    }
+    }*/
 
-    .name {
+/*    .name {
       display: none;
-    }
+    }*/
 
     cursor: pointer;
-    width: 250px;
-    height: 125px;
+/*    width: 250px;
+    height: 125px;*/
   }
 }
 
