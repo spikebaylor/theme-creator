@@ -1,30 +1,6 @@
 <div class="container">
-    <div class="gamut-block">
-        <div class="label">HEX</div>
-        <input pInputText [value]="hexString()" readonly (click)="copy(hexString())">
-        @if (!inRGBGamut()) {
-            <div class="warning">Not in sRGB Gamut</div>
-        }
-    </div>
-
-    <div class="gamut-block">
-        <div class="label">sRGB</div>
-        <input pInputText [value]="rgbString()" readonly (click)="copy(rgbString())">
-        @if (!inRGBGamut()) {
-            <div class="warning">Color is actually {{actualRGB()}}</div>
-        }
-    </div>
-
-    <div class="gamut-block">
-        <div class="label">HSL</div>
-        <input pInputText [value]="hslString()" readonly (click)="copy(hslString())">
-        @if (!inRGBGamut()) {
-            <div class="warning">Color is actually {{actualHSL()}}</div>
-        }
-    </div>
-
-    <div class="gamut-block">
-        <div class="label">okLCH</div>
-        <input pInputText [value]="lchString()" readonly (click)="copy(lchString())">
-    </div>
+  <app-detail-row label="HEX" [value]="hexString()" [isWarning]="!inRGBGamut()" warning="Not in sRGB Gamut"></app-detail-row>
+  <app-detail-row label="sRGB" [value]="rgbString()" [isWarning]="!inRGBGamut()" warning="Color is actually {{actualRGB()}}"></app-detail-row>
+  <app-detail-row label="HSL" [value]="hslString()" [isWarning]="!inRGBGamut()" warning="Color is actually {{actualHSL()}}"></app-detail-row>
+  <app-detail-row label="okLCH" [value]="lchString()"></app-detail-row>
 </div>

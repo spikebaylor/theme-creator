@@ -2,13 +2,15 @@ import {Component, computed, effect, EventEmitter, input, Output} from '@angular
 import {InputTextModule} from "primeng/inputtext";
 import {Color} from "../../../models/Color";
 import {ButtonModule} from "primeng/button";
+import {DetailRowComponent} from "./detail-row/detail-row.component";
 
 @Component({
   selector: 'app-color-details',
   standalone: true,
   imports: [
     InputTextModule,
-    ButtonModule
+    ButtonModule,
+    DetailRowComponent
   ],
   templateUrl: './color-details.component.html',
   styleUrl: './color-details.component.scss'

@@ -1,0 +1,35 @@
+.detail-row {
+
+  .label {
+    font-size: 9pt;
+    font-weight: bold;
+
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    align-items: center;
+  }
+
+  input {
+    width: 100%;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &:focus {
+      box-shadow: none;
+    }
+  }
+
+  .warning {
+    color: #b00;
+    font-weight: bold;
+    font-size: 8pt;
+  }
+
+  .copied {
+    font-size: 7pt;
+    color: var(--primary-color)
+  }
+}
