@@ -56,3 +56,10 @@
 .darkText {
   color: black;
 }
+
+::ng-deep {
+  .p-tooltip-text {
+    width: 250px;
+  }
+}
+

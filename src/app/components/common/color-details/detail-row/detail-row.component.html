@@ -1,11 +1,9 @@
 <div class="detail-row">
   <div class="label">
     <span>{{label()}}</span>
-    @if (showCopied) {
-      <span class="copied">copied</span>
-    }
+    <span class="copied">{{copied}}</span>
   </div>
-  <input pInputText [value]="value()" readonly (click)="copy()">
+  <input pInputText [value]="value()" readonly (click)="copy()" size="Small">
   @if (isWarning()) {
     <div class="warning">{{warning()}}</div>
   }

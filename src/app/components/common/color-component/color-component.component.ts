@@ -4,11 +4,16 @@ import {ColorTheory} from "../../../models/ColorTheory";
 import _default from "chart.js/dist/plugins/plugin.legend";
 import {ColorPickerDialogComponent} from "../../dialogs/color-picker-dialog/color-picker-dialog.component";
 import {DialogService} from "primeng/dynamicdialog";
+import {ColorDetailsComponent} from "../color-details/color-details.component";
+import {TooltipModule} from "primeng/tooltip";
 
 @Component({
   selector: 'app-color-component',
   standalone: true,
-  imports: [],
+  imports: [
+    ColorDetailsComponent,
+    TooltipModule
+  ],
   templateUrl: './color-component.component.html',
   styleUrl: './color-component.component.scss',
   providers: [DialogService]

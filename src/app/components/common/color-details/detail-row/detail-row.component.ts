@@ -17,15 +17,16 @@ export class DetailRowComponent {
   isWarning = input<boolean>(false)
   warning = input<string>("")
 
-  showCopied = false
+  copied = ""
   interval: any
 
   copy() {
     navigator.clipboard.writeText(this.value())
-    this.showCopied = true;
+    console.log(`COPIED!: ${this.value()}`)
+    this.copied = "copied";
     if (this.interval) {
       clearInterval(this.interval)
     }
-    this.interval = setInterval(() => this.showCopied = false, 2000)
+    this.interval = setInterval(() => this.copied = "", 2000)
   }
 }
