@@ -27,6 +27,9 @@ export class DetailRowComponent {
     if (this.interval) {
       clearInterval(this.interval)
     }
-    this.interval = setInterval(() => this.copied = "", 2000)
+    this.interval = setInterval(() => {
+      this.copied = ""
+      console.log("RESET")
+    }, 2000)
   }
 }

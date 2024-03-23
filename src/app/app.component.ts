@@ -10,11 +10,12 @@ import {DialogService} from "primeng/dynamicdialog";
 import {ButtonModule} from "primeng/button";
 import {ColorSchemePageComponent} from "./components/pages/color-scheme-page/color-scheme-page.component";
 import {TestNordComponent} from "./test/test-nord/test-nord.component";
+import {ColorTheoryPanelComponent} from "./components/common/color-theory-panel/color-theory-panel.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-    imports: [RouterOutlet, ColorComponent, ColorChartComponent, ThemePageComponent, ColorPickerPanelComponent, ButtonModule, ColorSchemePageComponent, TestNordComponent],
+    imports: [RouterOutlet, ColorComponent, ColorChartComponent, ThemePageComponent, ColorPickerPanelComponent, ButtonModule, ColorSchemePageComponent, TestNordComponent, ColorTheoryPanelComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   providers: [DialogService]

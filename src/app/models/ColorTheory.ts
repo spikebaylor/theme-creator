@@ -68,6 +68,35 @@ export class LCH {
 }
 
 export class HSL {
+
+    compliment(root: Color): Color {
+        return root.modifyHueHSL(h => (h + 180) % 360)
+    }
+
+    analogous(root: Color, phi: number): Color[] {
+        const c1 = root.modifyHueHSL(h => h - phi)
+        const c2 = root.modifyHueHSL(h => h + phi)
+        return [c1, c2]
+    }
+
+    splitCompliment(root: Color, phi: number): Color[] {
+        const compliment = this.compliment(root)
+        const c1 = compliment.modifyHueHSL(h => h - phi)
+        const c2 = compliment.modifyHueHSL(h => h + phi)
+        return [c1, c2]
+    }
+
+    triadic(root: Color): Color[] {
+        return this.analogous(root, 120);
+    }
+
+    tetradic(root: Color): Color[] {
+        const comp = this.compliment(root);
+        const tetra = this.analogous(root, 90)
+        tetra.splice(1, 0, comp)
+        return tetra
+    }
+
     public rangeOverLightness(color: Color, steps: number = 20): Color[] {
         return this.rangeOverFunc(color, (c, v) => c.modifyLightnessHSL(_ => v), 100, 0, steps)
     }

@@ -1,0 +1,20 @@
+<div class="container">
+
+    <div class="gamut-container">
+        <div class="label">HSL</div>
+        <div class="colors">
+            @for (c of hslColors(); track $index) {
+                <app-color-component [color]="c" (click)="onColorSelected(c)"></app-color-component>
+            }
+        </div>
+    </div>
+
+    <div class="gamut-container">
+        <div class="label">okLCH</div>
+        <div class="colors">
+            @for (c of lchColors(); track $index) {
+                <app-color-component [color]="c" (click)="onColorSelected(c)"></app-color-component>
+            }
+        </div>
+    </div>
+</div>

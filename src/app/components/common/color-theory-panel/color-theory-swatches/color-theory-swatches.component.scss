@@ -1,0 +1,28 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  .gamut-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    .label {
+      font-size: 9pt;
+      font-weight: bold;
+    }
+
+    .colors {
+      display: flex;
+      flex-direction: row;
+      gap: 4px;
+
+      .color {
+
+      }
+    }
+  }
+
+
+}

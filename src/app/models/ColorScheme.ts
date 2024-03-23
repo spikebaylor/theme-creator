@@ -45,8 +45,6 @@ export class ColorScheme {
         this.setColor(ColorScheme.SUCCESS, success)
         this.setColor(ColorScheme.WARN, warn)
         this.setColor(ColorScheme.DANGER, danger)
-
-
     }
 
     private makeTonalPalette(root: Color): Map<number, Color> {

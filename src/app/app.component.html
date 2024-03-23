@@ -1,7 +1,11 @@
-<div style="display: flex; flex-direction: row; gap: 32px; padding: 16px;">
+<!--<div style="display: flex; flex-direction: row; gap: 32px; padding: 16px;">
     <p-button (click)="onGenerate()">Generate Theme</p-button>
-    <!--<app-theme-page [theme]="theme()"></app-theme-page>-->
+    &lt;!&ndash;<app-theme-page [theme]="theme()"></app-theme-page>&ndash;&gt;
     <app-color-scheme-page [scheme]="scheme()"></app-color-scheme-page>
-</div>
+</div>-->
 
-<app-test-nord></app-test-nord>
+@if (scheme()) {
+    <div style="padding: 16px; border: 1px solid lightblue; margin: 8px; width: 600px">
+        <app-color-theory-panel [theme]="scheme()"></app-color-theory-panel>
+    </div>
+}

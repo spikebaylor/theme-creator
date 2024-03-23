@@ -7,3 +7,37 @@ body {
   margin: 0;
   padding: 0;
 }
+
+.flexrow {
+  display: flex;
+  flex-direction: row;
+}
+
+.flexcol {
+  display: flex;
+  flex-direction: column;
+}
+
+.gap4 {
+  gap: 4px;
+}
+
+.gap8 {
+  gap: 8px;
+}
+
+.gap16 {
+  gap: 16px;
+}
+
+.gap32 {
+  gap: 32px;
+}
+
+.flex-align-center {
+  align-items: center;
+}
+
+.flex-fill-space {
+  flex-grow: 1;
+}
