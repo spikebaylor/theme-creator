@@ -13,7 +13,7 @@
       "@models/*": ["src/app/models/*"],
       "@services/*": ["src/app/services/*"],
       "@test/*": ["src/app/test/*"],
-      "@utils/*": ["src/app/models/*"]
+      "@utils/*": ["src/app/utils/*"]
     }
   },
   "files": [

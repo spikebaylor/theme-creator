@@ -1,8 +1,6 @@
 import {Component, signal} from '@angular/core';
 import {RouterOutlet} from '@angular/router';
 import {ColorComponent} from "@components-common/color-component/color-component.component";
-import {Color} from "@utils/Color";
-import {ColorTheory} from "@utils/ColorTheory";
 import {ColorChartComponent} from "@components-common/color-chart/color-chart.component";
 import {ThemePageComponent} from "@pages/theme-page/theme-page.component";
 import {ColorPickerPanelComponent} from "@components-common/color-picker-panel/color-picker-panel.component";
@@ -12,6 +10,8 @@ import {ColorSchemePageComponent} from "@pages/color-scheme-page/color-scheme-pa
 import {TestNordComponent} from '@test/test-nord/test-nord.component';
 import {ColorTheoryPanelComponent} from "@components-common/color-theory-panel/color-theory-panel.component";
 import {TestLocalStorageComponent} from "@test/test-local-storage/test-local-storage.component";
+import {ColorTheory} from "@models/ColorTheory";
+import {Color} from "@models/Color";
 
 @Component({
   selector: 'app-root',

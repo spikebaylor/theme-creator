@@ -35,6 +35,7 @@ export class ColorComponent {
     if (this.allowColorSelection()) {
       ColorPickerDialogComponent.showDialog(this.color(), this.dialogService).onClose.subscribe(c => {
         if (c) {
+          this.color.set(c)
           this.colorSelected.emit(c)
         }
       })

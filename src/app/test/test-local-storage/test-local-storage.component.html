@@ -1,3 +1,9 @@
-<p>{{myString()}}</p>
+<h2>String: {{myString()}}</h2>
 
 <input pInputText [(ngModel)]="myString">
+
+<h2>Number: {{myNumber()}}</h2>
+<p-inputNumber [(ngModel)]="myNumber"></p-inputNumber>
+
+<h2>Color: {{myColor().toHexString()}}</h2>
+<app-color-component [(color)]="myColor"  [allowColorSelection]="true"></app-color-component>
