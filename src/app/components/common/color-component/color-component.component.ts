@@ -1,7 +1,6 @@
-import {Component, computed, EventEmitter, input, Input, model, OnChanges, Output, SimpleChanges} from '@angular/core';
+import {Component, computed, EventEmitter, input, Output} from '@angular/core';
 import {Color} from "../../../models/Color";
 import {ColorTheory} from "../../../models/ColorTheory";
-import _default from "chart.js/dist/plugins/plugin.legend";
 import {ColorPickerDialogComponent} from "../../dialogs/color-picker-dialog/color-picker-dialog.component";
 import {DialogService} from "primeng/dynamicdialog";
 import {ColorDetailsComponent} from "../color-details/color-details.component";
@@ -20,7 +19,7 @@ import {TooltipModule} from "primeng/tooltip";
 })
 export class ColorComponent {
 
-  color = model.required<Color>()
+  color = input.required<Color>()
   @Output()
   colorSelected = new EventEmitter<Color>()
   textShouldBeLight = computed(() => ColorTheory.textColorShouldBeLight(this.color()))
@@ -32,13 +31,13 @@ export class ColorComponent {
   }
 
   onPanelClick() {
-    if (this.allowColorSelection()) {
+/*    if (this.allowColorSelection()) {
       ColorPickerDialogComponent.showDialog(this.color(), this.dialogService).onClose.subscribe(c => {
         if (c) {
           this.colorSelected.emit(c)
         }
       })
-    }
+    }*/
   }
 
   getTitle(): string {

@@ -3,13 +3,15 @@ import {DialogService, DynamicDialogConfig, DynamicDialogRef} from "primeng/dyna
 import {Color} from "../../../models/Color";
 import {ButtonModule} from "primeng/button";
 import {ColorPickerPanelComponent} from "../../common/color-picker-panel/color-picker-panel.component";
+import {ColorScheme} from "../../../models/ColorScheme";
+import {ColorChooserPanelComponent} from "../../common/color-chooser-panel/color-chooser-panel.component";
 
 @Component({
   selector: 'app-color-picker-dialog',
   standalone: true,
   imports: [
     ButtonModule,
-    ColorPickerPanelComponent
+    ColorChooserPanelComponent
   ],
   templateUrl: './color-picker-dialog.component.html',
   styleUrl: './color-picker-dialog.component.scss'
@@ -18,7 +20,7 @@ export class ColorPickerDialogComponent {
 
   color: Color;
 
-  public static showDialog(color: Color = Color.fromString("red"), dialogService: DialogService): DynamicDialogRef {
+  public static showDialog(color: Color, dialogService: DialogService): DynamicDialogRef {
     return dialogService.open(ColorPickerDialogComponent, {
       header: 'Choose Color',
       width: '700px',

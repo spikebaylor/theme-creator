@@ -1,6 +1,5 @@
-import {Component, computed, EventEmitter, input, Output} from '@angular/core';
+import {Component, EventEmitter, input, Output, signal} from '@angular/core';
 import {Color} from "../../../../models/Color";
-import {ColorTheory} from "../../../../models/ColorTheory";
 import {ColorComponent} from "../../color-component/color-component.component";
 
 @Component({

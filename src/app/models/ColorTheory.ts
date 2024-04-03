@@ -214,6 +214,20 @@ export class ColorTheory {
         );
     }
 
+    static generateScemeTriadic(primary: Color): ColorScheme {
+        const traidc = ColorTheory.HSL.triadic(primary)
+        return new ColorScheme(
+            primary,
+            traidc[0],
+            traidc[1],
+            ColorTheory.LCH.neutralLight(primary),
+            ColorTheory.LCH.neutralDark(primary),
+            primary.forceHSLGamut().modifyHueHSL(_ => 0),
+            primary.forceHSLGamut().modifyHueHSL(_ => 120),
+            primary.forceHSLGamut().modifyHueHSL(_ => 30)
+        );
+    }
+
     static textColorShouldBeLight(bg: Color): boolean {
         // this is not the same as LCH Luminance i think
         const perceivedLuminance = (0.299 * bg.red(true) + 0.587 * bg.green(true) + 0.114 * bg.blue(true));

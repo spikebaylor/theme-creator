@@ -1,48 +1,22 @@
-<div class="wrapper">
+<div class="container" #container>
 
-    <div class="container" #container>
-
-        <div class="colorbox-container">
-
-            <div class="colorbox-header">
-                <div class="header">RGB</div>
-                <div class="header">{{colorSpace}}</div>
-            </div>
-
-            <div class="colorbox">
-                <div class="color" [style.background-color]="rgbColor()">
-                    @if(!inRGBGamut()) {
-                        <div [style.color]="ColorTheory.textColor(color())">RGB Fallback</div>
-                    }
-                </div>
-                <div class="color" [style.background-color]="color()"></div>
-            </div>
-        </div>
-
-      <div style="display: flex; flex-direction: row; gap: 8px; align-items: center">
+    <div style="display: flex; flex-direction: row; gap: 8px; align-items: center">
         <p-dropdown [options]="colorSpaceOptions" [(ngModel)]="colorSpace"></p-dropdown>
 
         <input pInputText [(ngModel)]="textInput" style="height: 32px; flex-grow: 1">
         <p-button (click)="onSetColorClicked()" [outlined]="true" size="small">Set Color</p-button>
-      </div>
-
-        @switch (colorSpace) {
-            @case ("HSL") {
-                <app-hslwidgets [color]="color()" (colorChange)="color.set($event)"></app-hslwidgets>
-            }
-            @case ("RGB") {
-                <app-rgbwidgets [color]="color()" (colorChange)="color.set($event)"></app-rgbwidgets>
-            }
-            @case ("okLCH") {
-                <app-lchwidgets [color]="color()" (colorChange)="color.set($event)"></app-lchwidgets>
-            }
-        }
-
     </div>
 
-    <p-panel header="Details" [toggleable]="true" [collapsed]="false">
-        <app-color-details [color]="color()"></app-color-details>
-    </p-panel>
-
+    @switch (colorSpace) {
+        @case ("HSL") {
+            <app-hslwidgets [color]="color()" (colorChange)="color.set($event)"></app-hslwidgets>
+        }
+        @case ("RGB") {
+            <app-rgbwidgets [color]="color()" (colorChange)="color.set($event)"></app-rgbwidgets>
+        }
+        @case ("okLCH") {
+            <app-lchwidgets [color]="color()" (colorChange)="color.set($event)"></app-lchwidgets>
+        }
+    }
 
 </div>

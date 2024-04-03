@@ -39,8 +39,6 @@ import {RGBWidgetsComponent} from "./rgbwidgets/rgbwidgets.component";
 export class ColorPickerPanelComponent {
 
   color = model(Color.fromString("blue"))
-  rgbColor = computed(() => this.color().forceRGBGamut())
-  inRGBGamut = computed(() => this.color().inRGBGamut())
 
   colorSpaceOptions = ["HSL", "RGB", "okLCH" ]
   colorSpace = "HSL"

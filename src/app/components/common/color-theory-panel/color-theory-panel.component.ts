@@ -1,4 +1,4 @@
-import {Component, computed, effect, input, signal} from '@angular/core';
+import {Component, computed, effect, input, model, signal, WritableSignal} from '@angular/core';
 import {Color} from "../../../models/Color";
 import {ButtonModule} from "primeng/button";
 import {ColorDetailsComponent} from "../color-details/color-details.component";
@@ -13,6 +13,7 @@ import { ColorTheory } from '../../../models/ColorTheory';
 import {ColorTheorySwatches} from "./color-theory-swatches/color-theory-swatches.component";
 import {ColorScheme} from "../../../models/ColorScheme";
 import {SliderModule} from "primeng/slider";
+import {StateManager} from "../../../services/state-manager.service";
 
 @Component({
   selector: 'app-color-theory-panel',
@@ -34,9 +35,12 @@ import {SliderModule} from "primeng/slider";
   styleUrl: './color-theory-panel.component.scss'
 })
 export class ColorTheoryPanelComponent {
+  protected readonly ColorTheory = ColorTheory;
 
-  theme = input.required<ColorScheme>()
-  rootColorOptions = computed(() => this.getRootColors(this.theme()))
+  options = ["Compliment", "Analogous", "Split Compliment", "Triadic", "Tetradic" ]
+  rootColorOptions: ColorOption[] = [];
+
+  color = model<Color>(Color.fromString("blue"))
   rootColor = signal(new ColorOption("blue", Color.fromString("blue")));
   optionChoice = signal<string>("Triadic")
   phi = signal<number>(35)
@@ -48,18 +52,13 @@ export class ColorTheoryPanelComponent {
     return ColorScheme.names.map(n => new ColorOption(n, colorScheme.getColor(n, 500)))
   }
 
-  color = signal(this.hslColors()[0])
-  options = ["Compliment", "Analogous", "Split Compliment", "Triadic", "Tetradic" ]
-
-  protected readonly ColorTheory = ColorTheory;
-  private init = false
-
-  constructor() {
-    // THis is a ridiculous hack because for some reason the required input of theme isn't set yet when
+  constructor(private state: StateManager) {
+    this.rootColorOptions = this.getRootColors(state.scheme())
+    // this is a ridiculous hack because for some reason the required input of theme isn't set yet when
     // trying to set the rootColor signal.
     setTimeout(() => {
-      this.rootColor.set(this.rootColorOptions()[0])
-    }, 500)
+      this.rootColor.set(this.rootColorOptions[0])
+    }, 50)
 
   }
 
@@ -72,6 +71,7 @@ export class ColorTheoryPanelComponent {
       case "Split Compliment": { colors = ColorTheory.HSL.splitCompliment(color, phi); break; }
       case "Triadic": { colors = ColorTheory.HSL.triadic(color); break; }
       case "Tetradic": { colors = ColorTheory.HSL.tetradic(color); break; }
+      default: { colors = [ColorTheory.HSL.compliment(color)]; break; }
     }
     colors.push(color)
     return colors;
@@ -86,6 +86,7 @@ export class ColorTheoryPanelComponent {
       case "Split Compliment": { colors = ColorTheory.LCH.splitCompliment(color, phi); break; }
       case "Triadic": { colors = ColorTheory.LCH.triadic(color); break; }
       case "Tetradic": { colors = ColorTheory.LCH.tetradic(color); break; }
+      default: { colors = [ColorTheory.LCH.compliment(color)]; break; }
     }
     colors.push(color)
     return colors;

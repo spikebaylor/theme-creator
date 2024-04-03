@@ -1,0 +1,48 @@
+<div class="wrapper">
+
+    <div class="container" #container>
+
+        <div class="colorbox-container">
+
+            <div class="colorbox-header">
+                <div class="header">RGB</div>
+                <div class="header">Chosen Color</div>
+            </div>
+
+            <div class="colorbox">
+                <div class="color" [style.background-color]="rgbColor()">
+                    @if(!inRGBGamut()) {
+                        <div [style.color]="ColorTheory.textColor(color())">RGB Fallback</div>
+                    }
+                </div>
+                <div class="color" [style.background-color]="color()"></div>
+            </div>
+        </div>
+
+        <div class="flexrow flex-align-center gap16">
+            <div class="flexrow flex-align-center gap4">
+                <p-radioButton name="chooserType" value="picker" [(ngModel)]="chooserType"></p-radioButton>
+                <span>Picker</span>
+            </div>
+            <div class="flexrow flex-align-center gap4">
+                <p-radioButton name="chooserType" value="theory" [(ngModel)]="chooserType"></p-radioButton>
+                <span>Theory</span>
+            </div>
+        </div>
+
+        @if (chooserType() == "picker") {
+            <app-color-picker-panel [(color)]="color"></app-color-picker-panel>
+        } @else {
+            <app-color-theory-panel [(color)]="color"></app-color-theory-panel>
+        }
+        <!-- panel based on radio buttons -->
+
+    </div>
+
+    <p-panel header="Details" [toggleable]="true" [collapsed]="false">
+        <app-color-details [color]="color()"></app-color-details>
+    </p-panel>
+
+
+</div>
+
