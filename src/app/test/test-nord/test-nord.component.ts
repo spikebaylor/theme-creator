@@ -2,14 +2,14 @@ import { Component } from '@angular/core';
 import {Nord} from "../../data/nord";
 import {Color} from "../../models/Color";
 import {ColorChartComponent} from "../../components/common/color-chart/color-chart.component";
-import {ColorComponent} from "../../components/common/color-component/color-component.component";
+import {ModifiableColorSwatch} from "../../components/common/modifiable-color-swatch/modifiable-color-swatch.component";
 
 @Component({
   selector: 'app-test-nord',
   standalone: true,
   imports: [
     ColorChartComponent,
-    ColorComponent
+    ModifiableColorSwatch
   ],
   templateUrl: './test-nord.component.html',
   styleUrl: './test-nord.component.scss'

@@ -2,7 +2,7 @@
 
 <div style="display: flex; flex-direction: column; gap: 8px">
     @for (c of chartColors; track $index) {
-        <app-color-component [color]="c"></app-color-component>
+        <app-modifiable-color-swatch [color]="c"></app-modifiable-color-swatch>
     }
 </div>
 

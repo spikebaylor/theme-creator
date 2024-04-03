@@ -4,7 +4,7 @@
         <div class="label">HSL</div>
         <div class="colors">
             @for (c of hslColors(); track $index) {
-                <app-color-component [color]="c" (click)="onColorSelected(c)"></app-color-component>
+                <app-color-swatch [color]="c" (click)="onColorSelected(c)"></app-color-swatch>
             }
         </div>
     </div>
@@ -13,7 +13,7 @@
         <div class="label">okLCH</div>
         <div class="colors">
             @for (c of lchColors(); track $index) {
-                <app-color-component [color]="c" (click)="onColorSelected(c)"></app-color-component>
+                <app-color-swatch [color]="c" (click)="onColorSelected(c)"></app-color-swatch>
             }
         </div>
     </div>

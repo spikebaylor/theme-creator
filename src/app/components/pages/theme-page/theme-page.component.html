@@ -2,27 +2,26 @@
 
     <div class="colors">
         <div class="colorcol">
-            <app-color-component title="Primary" [color]="theme().primary" (colorSelected)="theme().primary = $event" [allowColorSelection]="true"></app-color-component>
+            <app-modifiable-color-swatch title="Primary" [color]="theme().primary" (colorChange)="theme().primary = $event"></app-modifiable-color-swatch>
             <div class="hr"></div>
             @for (color of ptones(); track $index) {
-                <app-color-component [color]="color"></app-color-component>
+                <app-modifiable-color-swatch [color]="color"></app-modifiable-color-swatch>
             }
         </div>
         <div class="colorcol">
-            <app-color-component title="Secondary" [color]="theme().secondary" (colorSelected)="theme().primary = $event" [allowColorSelection]="true"></app-color-component>
+            <app-modifiable-color-swatch title="Secondary" [color]="theme().secondary" (colorChange)="theme().primary = $event"></app-modifiable-color-swatch>
             <div class="hr"></div>
             @for (color of stones(); track $index) {
-                <app-color-component [color]="color"></app-color-component>
+                <app-modifiable-color-swatch [color]="color"></app-modifiable-color-swatch>
             }
         </div>
-<!--        <app-color-component title="Primary" [color]="theme().primary" (colorSelected)="theme().primary = $event" [allowColorSelection]="true"></app-color-component>
-        <app-color-component title="Secondary" [color]="theme().secondary" (colorSelected)="theme().secondary = $event" [allowColorSelection]="true"></app-color-component>-->
-        <app-color-component title="Tertiary" [color]="theme().tertiary" (colorSelected)="theme().tertiary = $event" [allowColorSelection]="true"></app-color-component>
-        <app-color-component title="Neutral Light" [color]="theme().neutralLight" (colorSelected)="theme().neutralLight = $event" [allowColorSelection]="true"></app-color-component>
-        <app-color-component title="Neutral Dark" [color]="theme().neutralDark" (colorSelected)="theme().neutralDark = $event" [allowColorSelection]="true"></app-color-component>
-        <app-color-component title="Green" [color]="theme().green" (colorSelected)="theme().green = $event" [allowColorSelection]="true"></app-color-component>
-        <app-color-component title="Yellow" [color]="theme().yellow" (colorSelected)="theme().yellow = $event" [allowColorSelection]="true"></app-color-component>
-        <app-color-component title="Red" [color]="theme().red" (colorSelected)="theme().red = $event" [allowColorSelection]="true"></app-color-component>
+
+        <app-modifiable-color-swatch title="Tertiary" [color]="theme().tertiary" (colorChange)="theme().tertiary = $event"></app-modifiable-color-swatch>
+        <app-modifiable-color-swatch title="Neutral Light" [color]="theme().neutralLight" (colorChange)="theme().neutralLight = $event"></app-modifiable-color-swatch>
+        <app-modifiable-color-swatch title="Neutral Dark" [color]="theme().neutralDark" (colorChange)="theme().neutralDark = $event"></app-modifiable-color-swatch>
+        <app-modifiable-color-swatch title="Green" [color]="theme().green" (colorChange)="theme().green = $event"></app-modifiable-color-swatch>
+        <app-modifiable-color-swatch title="Yellow" [color]="theme().yellow" (colorChange)="theme().yellow = $event"></app-modifiable-color-swatch>
+        <app-modifiable-color-swatch title="Red" [color]="theme().red" (colorChange)="theme().red = $event"></app-modifiable-color-swatch>
     </div>
 
 

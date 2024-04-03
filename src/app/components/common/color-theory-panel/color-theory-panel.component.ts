@@ -1,4 +1,4 @@
-import {Component, computed, effect, input, model, signal, WritableSignal} from '@angular/core';
+import {Component, computed, effect, inject, input, model, signal, WritableSignal} from '@angular/core';
 import {Color} from "../../../models/Color";
 import {ButtonModule} from "primeng/button";
 import {ColorDetailsComponent} from "../color-details/color-details.component";
@@ -37,11 +37,12 @@ import {StateManager} from "../../../services/state-manager.service";
 export class ColorTheoryPanelComponent {
   protected readonly ColorTheory = ColorTheory;
 
+  state = inject(StateManager)
   options = ["Compliment", "Analogous", "Split Compliment", "Triadic", "Tetradic" ]
-  rootColorOptions: ColorOption[] = [];
+  rootColorOptions = computed(() => this.getRootColors(this.state.scheme()))
 
   color = model<Color>(Color.fromString("blue"))
-  rootColor = signal(new ColorOption("blue", Color.fromString("blue")));
+  rootColor = signal(this.rootColorOptions()[0]);
   optionChoice = signal<string>("Triadic")
   phi = signal<number>(35)
   hslColors = computed(() => this.makeHSL(this.optionChoice(), this.rootColor(), this.phi()))
@@ -50,16 +51,6 @@ export class ColorTheoryPanelComponent {
 
   private getRootColors(colorScheme: ColorScheme) {
     return ColorScheme.names.map(n => new ColorOption(n, colorScheme.getColor(n, 500)))
-  }
-
-  constructor(private state: StateManager) {
-    this.rootColorOptions = this.getRootColors(state.scheme())
-    // this is a ridiculous hack because for some reason the required input of theme isn't set yet when
-    // trying to set the rootColor signal.
-    setTimeout(() => {
-      this.rootColor.set(this.rootColorOptions[0])
-    }, 50)
-
   }
 
   private makeHSL(type: string, colorOption: ColorOption, phi: number): Color[] {

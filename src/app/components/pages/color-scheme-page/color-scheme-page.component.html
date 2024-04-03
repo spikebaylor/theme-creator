@@ -3,10 +3,10 @@
     <div class="colors">
         @for (colorName of ColorScheme.names; track $index) {
             <div class="colorcol">
-                <app-color-component [title]="colorName" [color]="scheme().getColor(colorName, 500)" (colorSelected)="setColor(colorName, $event)" [allowColorSelection]="true"></app-color-component>
+                <app-modifiable-color-swatch [title]="colorName" [color]="scheme().getColor(colorName, 500)" (colorChange)="setColor(colorName, $event)"></app-modifiable-color-swatch>
                 <div class="hr"></div>
                 @for (tone of ColorScheme.numbers; track $index) {
-                    <app-color-component [title]="colorName + '-' + tone" [color]="scheme().getColor(colorName, tone)"></app-color-component>
+                    <app-color-swatch [title]="colorName + '-' + tone" [color]="scheme().getColor(colorName, tone)"></app-color-swatch>
                 }
             </div>
         }

@@ -1,6 +1,6 @@
 import {Component, effect, signal} from '@angular/core';
 import {RouterOutlet} from '@angular/router';
-import {ColorComponent} from "./components/common/color-component/color-component.component";
+import {ModifiableColorSwatch} from "./components/common/modifiable-color-swatch/modifiable-color-swatch.component";
 import {Color} from "./models/Color";
 import {ColorTheory} from "./models/ColorTheory";
 import {ColorChartComponent} from "./components/common/color-chart/color-chart.component";
@@ -21,7 +21,7 @@ import {
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, ColorComponent, ColorChartComponent, ThemePageComponent, ColorPickerPanelComponent, ButtonModule, ColorSchemePageComponent, TestNordComponent, ColorTheoryPanelComponent, ColorChooserPanelComponent, ColorTheorySwatches],
+  imports: [RouterOutlet, ModifiableColorSwatch, ColorChartComponent, ThemePageComponent, ColorPickerPanelComponent, ButtonModule, ColorSchemePageComponent, TestNordComponent, ColorTheoryPanelComponent, ColorChooserPanelComponent, ColorTheorySwatches],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   providers: [DialogService]

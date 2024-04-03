@@ -8,7 +8,7 @@
 
         <div class="flexcol gap4">
             <div class="label">Root Color</div>
-            <p-dropdown [options]="rootColorOptions" optionLabel="name" [(ngModel)]="rootColor">
+            <p-dropdown [options]="rootColorOptions()" optionLabel="name" [(ngModel)]="rootColor">
                 <ng-template pTemplate="selectedItem">
                     <div class="colorOption">
                         <div [style.background-color]="rootColor().color" class="colorOptionSwatch"></div>

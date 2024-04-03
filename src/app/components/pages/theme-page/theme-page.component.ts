@@ -1,7 +1,7 @@
 import {Component, computed, input, Input} from '@angular/core';
 import {Theme} from "../../../models/Theme";
 import {Color} from "../../../models/Color";
-import {ColorComponent} from "../../common/color-component/color-component.component";
+import {ModifiableColorSwatch} from "../../common/modifiable-color-swatch/modifiable-color-swatch.component";
 import {NgForOf} from "@angular/common";
 import {ColorChartComponent} from "../../common/color-chart/color-chart.component";
 import {ColorTheory} from "../../../models/ColorTheory";
@@ -10,7 +10,7 @@ import {ColorTheory} from "../../../models/ColorTheory";
   selector: 'app-theme-page',
   standalone: true,
   imports: [
-    ColorComponent,
+    ModifiableColorSwatch,
     NgForOf,
     ColorChartComponent
   ],

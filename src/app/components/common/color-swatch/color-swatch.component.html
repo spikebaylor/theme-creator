@@ -1,4 +1,4 @@
-<div [style.background-color]="color()" class="container" (click)="onPanelClick()"
+<div [style.background-color]="color()" class="container"
      [pTooltip]="tooltipContent"
      [autoHide]="false"
      [showDelay]="500">
@@ -14,7 +14,7 @@
 </div>
 
 <ng-template #tooltipContent>
-  <div class="tooltip">
-    <app-color-details [color]="color()"></app-color-details>
-  </div>
+    <div class="tooltip">
+        <app-color-details [color]="color()"></app-color-details>
+    </div>
 </ng-template>

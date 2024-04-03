@@ -1,12 +1,14 @@
 import {Component, EventEmitter, input, Output, signal} from '@angular/core';
 import {Color} from "../../../../models/Color";
-import {ColorComponent} from "../../color-component/color-component.component";
+import {ModifiableColorSwatch} from "../../modifiable-color-swatch/modifiable-color-swatch.component";
+import {ColorSwatchComponent} from "../../color-swatch/color-swatch.component";
 
 @Component({
   selector: 'app-color-theory-swatches',
   standalone: true,
   imports: [
-    ColorComponent
+    ModifiableColorSwatch,
+    ColorSwatchComponent
   ],
   templateUrl: './color-theory-swatches.component.html',
   styleUrl: './color-theory-swatches.component.scss'
