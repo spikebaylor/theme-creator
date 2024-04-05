@@ -7,7 +7,7 @@
         <p-button (click)="onSetColorClicked()" [outlined]="true" size="small">Set Color</p-button>
     </div>
 
-    @switch (colorSpace) {
+    @switch (colorSpace()) {
         @case ("HSL") {
             <app-hslwidgets [color]="color()" (colorChange)="color.set($event)"></app-hslwidgets>
         }

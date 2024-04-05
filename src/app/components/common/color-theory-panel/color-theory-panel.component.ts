@@ -1,19 +1,22 @@
-import {Component, computed, effect, inject, input, model, signal, WritableSignal} from '@angular/core';
-import {Color} from "../../../models/Color";
+import {Component, computed, inject, model, signal} from '@angular/core';
+import {ColorDetailsComponent} from "@components-common/color-details/color-details.component";
+import {HSLWidgetsComponent} from "@components-common/color-picker-panel/hslwidgets/hslwidgets.component";
+import {LCHWidgetsComponent} from "@components-common/color-picker-panel/lchwidgets/lchwidgets.component";
+import {RGBWidgetsComponent} from "@components-common/color-picker-panel/rgbwidgets/rgbwidgets.component";
+import {
+  ColorTheorySwatches
+} from "@components-common/color-theory-panel/color-theory-swatches/color-theory-swatches.component";
+import {Color} from "@models/Color";
+import {ColorScheme} from "@models/ColorScheme";
+import {ColorTheory} from '@models/ColorTheory';
+import {StorageManager} from "@services/localstorage/StorageManager";
+import {StateManager} from "@services/state-manager.service";
 import {ButtonModule} from "primeng/button";
-import {ColorDetailsComponent} from "../color-details/color-details.component";
 import {DropdownModule} from "primeng/dropdown";
-import {HSLWidgetsComponent} from "../color-picker-panel/hslwidgets/hslwidgets.component";
 import {InputTextModule} from "primeng/inputtext";
-import {LCHWidgetsComponent} from "../color-picker-panel/lchwidgets/lchwidgets.component";
 import {PaginatorModule} from "primeng/paginator";
 import {PanelModule} from "primeng/panel";
-import {RGBWidgetsComponent} from "../color-picker-panel/rgbwidgets/rgbwidgets.component";
-import { ColorTheory } from '../../../models/ColorTheory';
-import {ColorTheorySwatches} from "./color-theory-swatches/color-theory-swatches.component";
-import {ColorScheme} from "../../../models/ColorScheme";
 import {SliderModule} from "primeng/slider";
-import {StateManager} from "../../../services/state-manager.service";
 
 @Component({
   selector: 'app-color-theory-panel',
@@ -43,7 +46,8 @@ export class ColorTheoryPanelComponent {
 
   color = model<Color>(Color.fromString("blue"))
   rootColor = signal(this.rootColorOptions()[0]);
-  optionChoice = signal<string>("Triadic")
+  private storage = inject(StorageManager)
+  optionChoice = this.storage.localStorage("colortheorypanel.optionChoice", "Triadic")
   phi = signal<number>(35)
   hslColors = computed(() => this.makeHSL(this.optionChoice(), this.rootColor(), this.phi()))
   lchColors = computed(() => this.makeLCH(this.optionChoice(), this.rootColor(), this.phi()))

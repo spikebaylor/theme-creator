@@ -1,19 +1,19 @@
-import {Component, computed, input, model} from '@angular/core';
-import {ButtonModule} from "primeng/button";
-import {ColorDetailsComponent} from "../color-details/color-details.component";
-import {DropdownModule} from "primeng/dropdown";
-import {HSLWidgetsComponent} from "../color-picker-panel/hslwidgets/hslwidgets.component";
-import {InputTextModule} from "primeng/inputtext";
-import {LCHWidgetsComponent} from "../color-picker-panel/lchwidgets/lchwidgets.component";
-import {PanelModule} from "primeng/panel";
-import {RGBWidgetsComponent} from "../color-picker-panel/rgbwidgets/rgbwidgets.component";
+import {Component, computed, inject, model} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {Color} from "../../../models/Color";
-import {ColorTheory} from "../../../models/ColorTheory";
+import {ColorDetailsComponent} from "@components-common/color-details/color-details.component";
+import {ColorPickerPanelComponent} from "@components-common/color-picker-panel/color-picker-panel.component";
+import {HSLWidgetsComponent} from "@components-common/color-picker-panel/hslwidgets/hslwidgets.component";
+import {LCHWidgetsComponent} from "@components-common/color-picker-panel/lchwidgets/lchwidgets.component";
+import {RGBWidgetsComponent} from "@components-common/color-picker-panel/rgbwidgets/rgbwidgets.component";
+import {ColorTheoryPanelComponent} from "@components-common/color-theory-panel/color-theory-panel.component";
+import {Color} from "@models/Color";
+import {ColorTheory} from "@models/ColorTheory";
+import {StorageManager} from "@services/localstorage/StorageManager";
+import {ButtonModule} from "primeng/button";
+import {DropdownModule} from "primeng/dropdown";
+import {InputTextModule} from "primeng/inputtext";
+import {PanelModule} from "primeng/panel";
 import {RadioButtonModule} from "primeng/radiobutton";
-import {ColorPickerPanelComponent} from "../color-picker-panel/color-picker-panel.component";
-import {ColorTheoryPanelComponent} from "../color-theory-panel/color-theory-panel.component";
-import {ColorScheme} from "../../../models/ColorScheme";
 
 @Component({
   selector: 'app-color-chooser-panel',
@@ -38,10 +38,12 @@ import {ColorScheme} from "../../../models/ColorScheme";
 })
 export class ColorChooserPanelComponent {
 
+    storage = inject(StorageManager)
+
     color = model(Color.fromString("blue"))
     rgbColor = computed(() => this.color().forceRGBGamut())
     inRGBGamut = computed(() => this.color().inRGBGamut())
-    chooserType = model<string>("picker")
+    chooserType = this.storage.localStorage("colorchooserpanel.chooserType", "picker")
 
     protected readonly ColorTheory = ColorTheory;
 }

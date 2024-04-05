@@ -1,19 +1,20 @@
-import {Component, computed, effect, ElementRef, model, viewChild} from '@angular/core';
-import {SliderModule} from "primeng/slider";
-import {Color} from "../../../models/Color";
+import {Component, inject, model} from '@angular/core';
 import {FormsModule} from "@angular/forms";
-import {ColorTheory} from "../../../models/ColorTheory";
-import {InputTextModule} from "primeng/inputtext";
-import {InputNumberModule} from "primeng/inputnumber";
-import {ColorSliderComponent} from "./color-slider/color-slider.component";
-import {LCHWidgetsComponent} from "./lchwidgets/lchwidgets.component";
-import {DropdownModule} from "primeng/dropdown";
-import {HSLWidgetsComponent} from "./hslwidgets/hslwidgets.component";
-import {ColorDetailsComponent} from "../color-details/color-details.component";
+import {ColorDetailsComponent} from "@components-common/color-details/color-details.component";
+import {ColorSliderComponent} from "@components-common/color-picker-panel/color-slider/color-slider.component";
+import {HSLWidgetsComponent} from "@components-common/color-picker-panel/hslwidgets/hslwidgets.component";
+import {LCHWidgetsComponent} from "@components-common/color-picker-panel/lchwidgets/lchwidgets.component";
+import {RGBWidgetsComponent} from "@components-common/color-picker-panel/rgbwidgets/rgbwidgets.component";
+import {Color} from "@models/Color";
+import {ColorTheory} from "@models/ColorTheory";
+import {StorageManager} from "@services/localstorage/StorageManager";
 import {AccordionModule} from "primeng/accordion";
-import {PanelModule} from "primeng/panel";
 import {ButtonModule} from "primeng/button";
-import {RGBWidgetsComponent} from "./rgbwidgets/rgbwidgets.component";
+import {DropdownModule} from "primeng/dropdown";
+import {InputNumberModule} from "primeng/inputnumber";
+import {InputTextModule} from "primeng/inputtext";
+import {PanelModule} from "primeng/panel";
+import {SliderModule} from "primeng/slider";
 
 @Component({
   selector: 'app-color-picker-panel',
@@ -38,10 +39,12 @@ import {RGBWidgetsComponent} from "./rgbwidgets/rgbwidgets.component";
 })
 export class ColorPickerPanelComponent {
 
+  private storage = inject(StorageManager)
+
   color = model(Color.fromString("blue"))
 
   colorSpaceOptions = ["HSL", "RGB", "okLCH" ]
-  colorSpace = "HSL"
+  colorSpace = this.storage.localStorage("colorpickerpanel.colorSpace", "HSL")
 
   protected readonly ColorTheory = ColorTheory;
   textInput: string = '';
