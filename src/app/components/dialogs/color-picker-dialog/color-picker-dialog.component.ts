@@ -23,7 +23,7 @@ export class ColorPickerDialogComponent {
   public static showDialog(color: Color, dialogService: DialogService): DynamicDialogRef {
     return dialogService.open(ColorPickerDialogComponent, {
       header: 'Choose Color',
-      width: '700px',
+      width: '450px',
       data: {inputColor: color}
     })
   }

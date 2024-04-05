@@ -21,6 +21,8 @@ export class ColorSwatchComponent {
   textShouldBeLight = computed(() => ColorTheory.textColorShouldBeLight(this.color()))
   title = input<string>('')
   hex = computed(() => this.color().toHexString())
+  size = input<number>(64)
+  borderRadius = computed(() => Math.ceil(this.size()) / 8)
 
   getTitle(): string {
     if (this.title() == "") {

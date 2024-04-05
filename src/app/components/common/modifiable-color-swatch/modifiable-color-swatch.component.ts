@@ -23,7 +23,7 @@ export class ModifiableColorSwatch {
 
   color = model.required<Color>()
   title = input<string>('')
-
+  size = input<number>(64)
   constructor(private dialogService: DialogService) {
   }
 

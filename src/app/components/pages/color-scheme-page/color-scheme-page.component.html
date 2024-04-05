@@ -6,7 +6,7 @@
                 <app-modifiable-color-swatch [title]="colorName" [color]="scheme().getColor(colorName, 500)" (colorChange)="setColor(colorName, $event)"></app-modifiable-color-swatch>
                 <div class="hr"></div>
                 @for (tone of ColorScheme.numbers; track $index) {
-                    <app-color-swatch [title]="colorName + '-' + tone" [color]="scheme().getColor(colorName, tone)"></app-color-swatch>
+                    <app-color-swatch [title]="tone.toString()" [color]="scheme().getColor(colorName, tone)"></app-color-swatch>
                 }
             </div>
         }

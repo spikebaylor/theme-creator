@@ -1,14 +1,12 @@
 <div [style.background-color]="color()" class="container"
+     [style.width.px]="size()"
+     [style.height.px]="size()"
+     [style.border-radius.px]="borderRadius()"
      [pTooltip]="tooltipContent"
      [autoHide]="false"
      [showDelay]="500">
-    <div class="labels" [class]="textShouldBeLight() ? 'lightText' : 'darkText'">
-        <div>HEX: {{color().toHexString()}}</div>
-        <div>RGB: {{color().toRGBString()}}</div>
-        <div>HSL: {{color().toHSLString()}}</div>
-        <div>LCH: {{color().toLCHString()}}</div>
-    </div>
-    <div class="name" [class]="textShouldBeLight() ? 'lightText' : 'darkText'">
+
+    <div class="title" [class]="textShouldBeLight() ? 'lightText' : 'darkText'">
         <div>{{getTitle()}}</div>
     </div>
 </div>
